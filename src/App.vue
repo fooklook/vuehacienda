@@ -4,7 +4,9 @@
   <ul>
   <classify v-for="classify in classifys" v-bind:classify="classify"></classify>
   </ul>
-
+  <div class="article">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

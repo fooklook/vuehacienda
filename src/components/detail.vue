@@ -1,35 +1,35 @@
 <template>
   <div class="detail">
-  <div>文章栏目：{{ classify.article_classify_name }}</div>
-  <h2>{{ article.article_title }}</h2>
-  <div class="article" v-html="atricleMarkdown">
+  <div>文章栏目：{{ detail_classify.article_classify_name }}</div>
+  <h2>{{ detail_article.article_title }}</h2>
+  <div v-html="atricleMarkdown">
   </div>
   </div>
 </template>
 
 <script>
-import marked from 'marked'
+// import marked from 'marked'
 export default {
   name: 'detail',
   data: function () {
     return {
-      classify: '',
-      article: '',
-      params: this.$route.params
+      detail_classify: '',
+      detail_article: '',
+      detail_params: this.$route.params
     }
   },
   computed: {
     atricleMarkdown: function () {
-      return marked(this.article.article_content, { sanitize: true })
-      // return this.article.article_content
+      // return marked(this.detail_article.article_content, { sanitize: true })
+      return this.detail_article.article_content
     }
   },
   methods: {
     get_list: function () {
-      this.params = this.$route.params
-      this.$http.get(window.FOOKLOOK.site + this.$route.params.id + '/' + this.$route.params.name).then((response) => {
-        this.classify = response.body.classify
-        this.article = response.body.article
+      this.detail_params = this.$route.params
+      this.$http.get(window.FOOKLOOK.site + '/' + this.$route.params.id + '/' + this.$route.params.name).then((response) => {
+        this.detail_classify = response.body.classify
+        this.detail_article = response.body.article
       }, (response) => {
         console.log(response)
       })
