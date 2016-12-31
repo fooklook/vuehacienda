@@ -4,20 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
-import Page from './components/page'
-import ListPage from './components/list'
-import DetailPage from './components/detail'
+import Route from './router'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
-const routes = [
-  { path: '/', component: Page },
-  { path: '/list/:id', component: ListPage },
-  { path: '/detail/:id/:name', component: DetailPage }
-]
-
-const router = new VueRouter({
+var routes = Route.routers
+console.log(routes)
+var router = new VueRouter({
   routes
 })
 
