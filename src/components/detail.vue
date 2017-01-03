@@ -8,21 +8,18 @@
 </template>
 
 <script>
-// import marked from 'marked'
+import marked from 'marked'
 export default {
   name: 'detail',
   data: function () {
     return {
       detail_classify: '',
       detail_article: '',
-      detail_params: this.$route.params
+      detail_params: this.$route.params,
+      atricleMarkdown: ''
     }
   },
   computed: {
-    atricleMarkdown: function () {
-      // return marked(this.detail_article.article_content, { sanitize: true })
-      return this.detail_article.article_content
-    }
   },
   methods: {
     get_list: function () {
@@ -30,6 +27,7 @@ export default {
       this.$http.get(window.FOOKLOOK.site + '/' + this.$route.params.id + '/' + this.$route.params.name).then((response) => {
         this.detail_classify = response.body.classify
         this.detail_article = response.body.article
+        this.atricleMarkdown = marked(this.detail_article.article_content, { sanitize: true })
       }, (response) => {
         console.log(response)
       })
@@ -39,7 +37,9 @@ export default {
     this.get_list()
   },
   watch: {
-    '$route': function () { this.get_list() }
+    '$route': function () {
+      this.get_list()
+    }
   }
 }
 </script>
